@@ -1,7 +1,7 @@
 import './Homepage.css';
 import './header.css';
 
-function HomePage() {
+export function HomePage() {
     return (
         <div>
             <div className="header">
@@ -189,5 +189,3 @@ function HomePage() {
     </div>    
     );
 }
-
-export default HomePage;
