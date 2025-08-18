@@ -9,11 +9,18 @@ export function HomePage() {
 
   const [products, setProducts] = useState([]);
 
+  const [cart, setCart] = useState([]);
+
   useEffect( () => {
     axios.get('http://localhost:3000/api/products')     //this does the same work as the code before in the previous commit.
       .then( (response) => {  
         setProducts(response.data);    //saving the products all the info in state for further usages. 
       });
+
+    axios.get('http://localhost:3000/api/cart-items')       // to get the data inside cart. in HomePage.jsx cus homepage has that cart icon that displays how many items are in the cart.
+      .then( (response) => {
+        setCart(response.data);
+      })
   }, []);     //we used useEffect here cus this all requesting to the backend, and getting the response, using the data inside the response is in Homepage file and the problem is when we refresh the homepage, axios sends a request to the backend everytime the page refreshes. so we used useEffect with [] an empty dependency array which controls when useEffect runs, resulting in running only once.
 
 
@@ -23,7 +30,9 @@ export function HomePage() {
 
       <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
 
-      <Header />
+      <Header 
+        cart = {cart}
+      />
 
       <div className="home-page">
         <div className="products-grid">
