@@ -1,17 +1,22 @@
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Header } from "../components/Header";
 import CheckmarkIcon from "../assets/images/icons/checkmark.png";
-import { products } from "../../starting-code/data/products";
 import "./Homepage.css";
+
 
 export function HomePage() {
 
-  axios.get('http://localhost:3000/api/products')     //this does the same work as the code before in the previous commit.
-    .then( (response) => {  
-      console.log(response.data);
-    });
+  const [products, setProducts] = useState([]);
 
-    
+  useEffect( () => {
+    axios.get('http://localhost:3000/api/products')     //this does the same work as the code before in the previous commit.
+      .then( (response) => {  
+        setProducts(response.data);    //saving the products all the info in state for further usages. 
+      });
+  }, []);     //we used useEffect here cus this all requesting to the backend, and getting the response, using the data inside the response is in Homepage file and the problem is when we refresh the homepage, axios sends a request to the backend everytime the page refreshes. so we used useEffect with [] an empty dependency array which controls when useEffect runs, resulting in running only once.
+
+
   return (
     <>
       <title>Ecommerce Project</title>
