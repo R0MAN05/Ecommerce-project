@@ -4,6 +4,18 @@ import { products } from "../../starting-code/data/products";
 import "./Homepage.css";
 
 export function HomePage() {
+
+  fetch('http://localhost:3000/api/products')     //fetch is an inbuilt Js function which fetchs data from the URL inside (). 
+      // this code is an asynchronous code.
+      //Fetch returns a Promise. and a Promise lets us wait for asynchronous code to finish.
+      // NOTE: we cant save this data in a variable (for eg: const products = fetch(); )
+
+    .then( (response) => {             //Promise has a method ".then" . How this code works is fetch('http://localhost:3000/api/products'); this function contacts the backend to get some data, but it take sometimes for the backend to respond so the code below this function (here return) is gonna run line by line, then at some point in the future this function is going to finish, we would get the response from the backend, when it(fetch) finishes in the future it will run the arrow function inside .then() thats how a promise works . And the respond is the response used as parameter in .then() function.
+      return response.json();  //response.json gives the data that is attached to the response in this case its products details. it is also asynchronous [cant save this in a variable]
+    }).then((data) => {      //this .then() waits for return response.json(); to finish then run the arrow function inside it. The data parameter is whats inside the response that backend gave, this is how we can get to access the data from backend.
+      console.log(data);
+    });
+
   return (
     <>
       <title>Ecommerce Project</title>
