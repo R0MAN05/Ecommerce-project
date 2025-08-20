@@ -13,7 +13,7 @@ function App() {
   const [cart, setCart] = useState([]);    //lifted the state up so different components and pages could use it.
 
   useEffect(() => {
-    axios.get('/api/cart-items')       // to get the data inside cart. in HomePage.jsx cus homepage has that cart icon that displays how many items are in the cart.
+    axios.get('/api/cart-items?expand=product')       // to get the data inside cart. in HomePage.jsx cus homepage has that cart icon that displays how many items are in the cart.  // ?expand=product is an query parameter which lets us add additional info to out request (when backend recieves the query parameter its gonna add product detail to the cart its gonna expand the cart with product details)
       .then( (response) => {
         setCart(response.data);
       })
