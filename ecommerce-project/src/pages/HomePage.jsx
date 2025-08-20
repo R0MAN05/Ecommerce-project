@@ -12,12 +12,12 @@ export function HomePage() {
   const [cart, setCart] = useState([]);
 
   useEffect( () => {
-    axios.get('http://localhost:3000/api/products')     //this does the same work as the code before in the previous commit.
+    axios.get('/api/products')     //this does the same work as the code before in the previous commit.
       .then( (response) => {  
         setProducts(response.data);    //saving the products all the info in state for further usages. 
       });
 
-    axios.get('http://localhost:3000/api/cart-items')       // to get the data inside cart. in HomePage.jsx cus homepage has that cart icon that displays how many items are in the cart.
+    axios.get('/api/cart-items')       // to get the data inside cart. in HomePage.jsx cus homepage has that cart icon that displays how many items are in the cart.
       .then( (response) => {
         setCart(response.data);
       })
