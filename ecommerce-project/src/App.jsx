@@ -19,12 +19,12 @@ function App() {
       })
     }, []);
 
-  return (
+  return (    //below passing the lifted state in the form of props and accessing it in the form of objects (for eg: cart={cart} and {cart} as object in the required components).
     <div>
       <Routes>
         <Route index element={<HomePage cart={cart} />} />
         <Route path="checkout" element={<CheckoutPage  cart={cart} />} />
-        <Route path="orders" element={<OrdersPage />} />
+        <Route path="orders" element={<OrdersPage cart={cart} />} />
         <Route path="tracking" element={<TrackingPage />} />
         <Route path="*" element={<UrlNotFoundPage />} />
       </Routes>
