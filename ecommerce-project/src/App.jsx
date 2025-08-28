@@ -13,10 +13,11 @@ function App() {
   const [cart, setCart] = useState([]);    //lifted the state up so different components and pages could use it.
 
   useEffect(() => {
-    axios.get('/api/cart-items?expand=product')       // to get the data inside cart. in HomePage.jsx cus homepage has that cart icon that displays how many items are in the cart.  // ?expand=product is an query parameter which lets us add additional info to out request (when backend recieves the query parameter its gonna add product detail to the cart its gonna expand the cart with product details)
-      .then( (response) => {
-        setCart(response.data);
-      })
+    const fetchAppData = async () => {             //used async await inside an useEffect to get the cart data form the backend.
+      const response = await axios.get('/api/cart-items?expand=product');
+      setCart(response.data);
+    }
+    fetchAppData();
     }, []);
 
   return (    //below passing the lifted state in the form of props and accessing it in the form of objects (for eg: cart={cart} and {cart} as object in the required components).
