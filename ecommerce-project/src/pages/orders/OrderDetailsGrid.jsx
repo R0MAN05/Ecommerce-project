@@ -29,7 +29,7 @@ export function OrderDetailsGrid( {order} ) {
                         </div>
 
                         <div className="product-actions">
-                            <Link to="/tracking">
+                            <Link to={`/tracking/${order.id}/${orderProduct.product.id}`}>   {/* AN COMMENT: inserted order and product ids into the Links templete string. */} 
                                 <button className="track-package-button button-secondary">
                                     Track package
                                 </button>
