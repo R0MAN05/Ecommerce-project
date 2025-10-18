@@ -5,11 +5,12 @@ import LogoWhite from '../assets/images/icons/logo-white.png';
 import MobileLogoWhite from '../assets/images/icons/mobile-logo-white.png';
 import "./Header.css";
 
-export function Header({ cart }) {
+export function Header({ cart = [] }) { // default to empty array so cart.forEach won't fail. The default parameter ({ cart = [] }) prevents the forEach TypeError when cart is undefined.
 
   let totalQuantity = 0;
 
-  cart.forEach( (cartItem) => {
+  cart.forEach( (cartItem) => { 
+    
     totalQuantity += cartItem.quantity;
   });
 
