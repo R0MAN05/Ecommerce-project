@@ -7,7 +7,7 @@ import "./CheckoutPage.css";
 
 
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState([null]);  //null cuz initaially if the cart orders is empty the payment summary would be null.
 
@@ -20,7 +20,7 @@ export function CheckoutPage({ cart }) {
       setPaymentSummary(response.data);
     };
     fetchCheckoutData();
-  }, []);
+  }, [cart]);   //added cart as dependency so whenever the cart changes the checkout data (payment summary data ) is refetched (reloaded).
 
   return (
     <>
@@ -34,7 +34,7 @@ export function CheckoutPage({ cart }) {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
+          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} loadCart={loadCart}/>
 
           <PaymentSummary paymentSummary={paymentSummary} />
         </div>
