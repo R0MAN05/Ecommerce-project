@@ -6,7 +6,6 @@ import { PaymentSummary } from "./PaymentSummary";
 import "./CheckoutPage.css";
 
 
-
 export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState([null]);  //null cuz initaially if the cart orders is empty the payment summary would be null.
@@ -36,7 +35,7 @@ export function CheckoutPage({ cart, loadCart }) {
         <div className="checkout-grid">
           <OrderSummary cart={cart} deliveryOptions={deliveryOptions} loadCart={loadCart}/>
 
-          <PaymentSummary paymentSummary={paymentSummary} />
+          <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
         </div>
       </div>
     </>

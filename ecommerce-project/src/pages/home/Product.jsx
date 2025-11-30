@@ -19,7 +19,7 @@ export function Product({ product, loadCart }) {
         setQuantity(quantitySelected);
         //console.log(quantitySelected);
     }
-    
+
     return (
         <div className="product-container">
             <div className="product-image-container">
@@ -42,7 +42,7 @@ export function Product({ product, loadCart }) {
             </div>
 
             <div className="product-price">
-                ${formatMoney(product.priceCents)}
+                {formatMoney(product.priceCents)}
             </div>
 
             <div className="product-quantity-container">
