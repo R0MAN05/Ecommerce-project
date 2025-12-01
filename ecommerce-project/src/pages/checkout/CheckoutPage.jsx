@@ -12,15 +12,21 @@ export function CheckoutPage({ cart, loadCart }) {
 
   useEffect(() => {
     const fetchCheckoutData = async () => {                       //used async await to make the code synchrounous.
-      let response = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime");
+      const response = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime");
       setDeliveryOptions(response.data);
-
-      response = await axios.get("api/payment-summary");
-      setPaymentSummary(response.data);
     };
     fetchCheckoutData();
-  }, [cart]);   //added cart as dependency so whenever the cart changes the checkout data (payment summary data ) is refetched (reloaded).
+  }, []);   //added cart as dependency so whenever the cart changes the checkout data (payment summary data ) is refetched (reloaded).
 
+  useEffect(() => {
+    const fetchPaymentSummary = async () => {
+      const response = await axios.get("api/payment-summary");
+      setPaymentSummary(response.data);
+    };
+    fetchPaymentSummary();
+  }, [cart]); //added cart as dependency so whenever the cart changes the checkout data (payment summary data ) is refetched (reloaded).
+
+  
   return (
     <>
       <title>Checkout</title>
