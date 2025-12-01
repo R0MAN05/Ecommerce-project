@@ -8,6 +8,9 @@ import { TrackingPage } from "./pages/TrackingPage";
 import { UrlNotFoundPage } from "./pages/UrlNotFoundPage";
 import "./App.css";
 
+window.axios = axios; // This makes axios available in the Console.
+// - Then, you can try running axios.post('/api/reset') in the Console.
+
 function App() {
 
   const [cart, setCart] = useState([]);    //lifted the state up so different components and pages could use it.
