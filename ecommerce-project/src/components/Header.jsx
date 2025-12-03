@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import { NavLink } from "react-router";
 import CartIcon from '../assets/images/icons/cart-icon.png';
 import SearchIcon from '../assets/images/icons/search-icon.png';
@@ -7,12 +8,21 @@ import "./Header.css";
 
 export function Header({ cart = [] }) { // default to empty array so cart.forEach won't fail. The default parameter ({ cart = [] }) prevents the forEach TypeError when cart is undefined.
 
+  const[searchTerm, setSearchTerm] = useState("");
   let totalQuantity = 0;
 
   cart.forEach( (cartItem) => { 
     
     totalQuantity += cartItem.quantity;
   });
+
+  const updateSearchInput = (event) => {
+    setSearchTerm(event.target.value)
+  }
+
+  const searchProducts = () => {
+    console.log(searchTerm)
+  }
 
   return (
     <div>
@@ -25,9 +35,9 @@ export function Header({ cart = [] }) { // default to empty array so cart.forEac
         </div>
 
         <div className="middle-section">
-          <input className="search-bar" type="text" placeholder="Search" />
+          <input className="search-bar" type="text" placeholder="Search" value={searchTerm} onChange={updateSearchInput}/>
 
-          <button className="search-button">
+          <button className="search-button}" onClick={searchProducts}>
             <img className="search-icon" src={SearchIcon} />
           </button>
         </div>
