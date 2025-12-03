@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { NavLink } from "react-router";
+import { NavLink, useNavigate, useSearchParams} from "react-router";
 import CartIcon from '../assets/images/icons/cart-icon.png';
 import SearchIcon from '../assets/images/icons/search-icon.png';
 import LogoWhite from '../assets/images/icons/logo-white.png';
@@ -8,7 +8,12 @@ import "./Header.css";
 
 export function Header({ cart = [] }) { // default to empty array so cart.forEach won't fail. The default parameter ({ cart = [] }) prevents the forEach TypeError when cart is undefined.
 
-  const[searchTerm, setSearchTerm] = useState("");
+    const [searchParams] = useSearchParams();
+    const searchText = searchParams.get('search');   // I need to use a different variable name since "search"
+  // is already being used below.
+
+  const[search, setSearch] = useState(searchText || '');  // || '' is a shortcut. It means if searchText does not exist
+  // it will use a default value of ''.
   let totalQuantity = 0;
 
   cart.forEach( (cartItem) => { 
@@ -17,12 +22,14 @@ export function Header({ cart = [] }) { // default to empty array so cart.forEac
   });
 
   const updateSearchInput = (event) => {
-    setSearchTerm(event.target.value)
+    setSearch(event.target.value)
   }
 
   const searchProducts = () => {
-    console.log(searchTerm)
+    navigate(`/?search=${search}`) //when the search button is clicked this function is called (navigate to URL "/?search=${search}" , navigating to / will navigate to the homepage. ?search=${search} saves the search text in the URL so we can share it between pages).
   }
+
+const navigate = useNavigate(); // useNavigate a hook used to navigate ro homepage in order to show the search results.
 
   return (
     <div>
@@ -35,7 +42,7 @@ export function Header({ cart = [] }) { // default to empty array so cart.forEac
         </div>
 
         <div className="middle-section">
-          <input className="search-bar" type="text" placeholder="Search" value={searchTerm} onChange={updateSearchInput}/>
+          <input className="search-bar" type="text" placeholder="Search" value={search} onChange={updateSearchInput}/>
 
           <button className="search-button}" onClick={searchProducts}>
             <img className="search-icon" src={SearchIcon} />

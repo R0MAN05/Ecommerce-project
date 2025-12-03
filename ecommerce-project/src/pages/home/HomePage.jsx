@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useSearchParams} from 'react-router';
 import { Header } from "../../components/Header";
 import { ProductsGrid } from './ProductsGrid';
 import "./Homepage.css";
@@ -9,13 +10,17 @@ export function HomePage({ cart, loadCart }) {
 
   const [products, setProducts] = useState([]);
 
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search');
+
   useEffect(() => {
     const getHomeData = async () => {            //here used the proper way of using async await code inside an useEffect. for more info check from 1:42:24 react course lesson 7. VVI
-      const response = await axios.get('/api/products');
+      const urlPath = search ? `/api/products?search=${search}` : '/api/products';
+      const response = await axios.get(urlPath)
       setProducts(response.data);
     };
     getHomeData();
-  }, []);
+  }, [search]);
 
   return (
     <>
