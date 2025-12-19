@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import CheckoutLockIcon from '../../assets/images/icons/checkout-lock-icon.png';
 import Logo from '../../assets/images/icons/logo.png';
 import MobileLogo from '../../assets/images/icons/mobile-logo.png';
@@ -14,7 +14,9 @@ export function CheckoutHeader( {cart} ) {
 
   return (
     <div>
-      <div className="checkout-header">
+      <div className="checkout-header"
+        data-testid = "checkout-header"
+      >
         <div className="header-content">
           <div className="checkout-header-left-section">
             <Link to="/">

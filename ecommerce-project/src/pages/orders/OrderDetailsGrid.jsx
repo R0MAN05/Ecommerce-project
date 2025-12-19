@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import BuyAgainIcon from "../../assets/images/icons/buy-again.png";
 
@@ -25,7 +25,9 @@ export function OrderDetailsGrid({ order, loadCart }) {
                             <img src={orderProduct.product.image} />
                         </div>
 
-                        <div className="product-details">
+                        <div className="product-details"
+                            data-testid="order-product-details"
+                        >
                             <div className="product-name">
                                 {orderProduct.product.name}
                             </div>

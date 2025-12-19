@@ -8,7 +8,7 @@ import "./CheckoutPage.css";
 
 export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [paymentSummary, setPaymentSummary] = useState([null]);  //null cuz initaially if the cart orders is empty the payment summary would be null.
+  const [paymentSummary, setPaymentSummary] = useState(null);  // null while payment summary is loading
 
   useEffect(() => {
     const fetchCheckoutData = async () => {                       //used async await to make the code synchrounous.
@@ -20,7 +20,7 @@ export function CheckoutPage({ cart, loadCart }) {
 
   useEffect(() => {
     const fetchPaymentSummary = async () => {
-      const response = await axios.get("api/payment-summary");
+      const response = await axios.get("/api/payment-summary");
       setPaymentSummary(response.data);
     };
     fetchPaymentSummary();
