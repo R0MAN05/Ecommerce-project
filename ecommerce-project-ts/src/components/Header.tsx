@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import CartIcon from '../assets/icons/cart-icon.png';
 import SearchIcon from '../assets/icons/search-icon.png';
@@ -6,7 +7,17 @@ import LogoWhite from '../assets/icons/logo-white.png';
 import MobileLogoWhite from '../assets/icons/mobile-logo-white.png';
 import "./Header.css";
 
-export function Header({ cart = [] }) { // default to empty array so cart.forEach won't fail. The default parameter ({ cart = [] }) prevents the forEach TypeError when cart is undefined.
+type HeaderProps = {
+  cart: {
+    productId: string; //telling Ts what objects does the cart array contains and their respective types.
+    quantity: number;
+    deliveryOptionId: number;
+  }[];  // telling Ts that the cart is an array of objects.
+}
+
+export function Header({ cart }: HeaderProps) { 
+  //with the help of Ts the error that we generally encounter in React with Js is removed. the problem was : (below comment)
+  // default to empty array so cart.forEach won't fail. The default parameter ({ cart = [] }) prevents the forEach TypeError when cart is undefined.
 
     const [searchParams] = useSearchParams();
     const searchText = searchParams.get('search');   // I need to use a different variable name since "search"
@@ -21,7 +32,7 @@ export function Header({ cart = [] }) { // default to empty array so cart.forEac
     totalQuantity += cartItem.quantity;
   });
 
-  const updateSearchInput = (event) => {
+  const updateSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
   }
 
