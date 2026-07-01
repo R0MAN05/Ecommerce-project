@@ -8,6 +8,13 @@ import { TrackingPage } from "./pages/TrackingPage";
 import { UrlNotFoundPage } from "./pages/UrlNotFoundPage";
 import "./App.css";
 
+// Declare global types so TypeScript recognizes adding axios to the window object
+declare global {
+  interface Window {
+    axios: typeof axios;
+  }
+}
+
 window.axios = axios; // This makes axios available in the Console.
 // - Then, you can try running axios.post('/api/reset') in the Console.
 
