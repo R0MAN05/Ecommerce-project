@@ -3,8 +3,7 @@ import type { ChangeEvent } from 'react';
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import CartIcon from '../assets/icons/cart-icon.png';
 import SearchIcon from '../assets/icons/search-icon.png';
-import LogoWhite from '../assets/icons/logo-white.png';
-import MobileLogoWhite from '../assets/icons/mobile-logo-white.png';
+
 import "./Header.css";
 
 type HeaderProps = {
@@ -47,8 +46,7 @@ const navigate = useNavigate(); // useNavigate a hook used to navigate ro homepa
       <div className="header">
         <div className="left-section">
           <NavLink to="/" className="header-link">
-            <img className="logo" data-testid="header-logo" src={LogoWhite} />
-            <img className="mobile-logo" data-testid="header-mobile-logo" src={MobileLogoWhite} />
+            <div className='logo'>Ecommerce</div>
           </NavLink>
         </div>
 

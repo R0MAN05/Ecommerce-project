@@ -41,10 +41,9 @@
 .header .logo {
   height: 26px;
   margin-top: 1px;
-}
-
-.header .mobile-logo {
-  display: none;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
 }
 
 @media (max-width: 675px) {
