@@ -24,6 +24,9 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// --- Path to the built frontend (sibling folder) ---
+const frontendDistPath = path.join(__dirname, '..', 'ecommerce-project-ts', 'dist');
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -39,12 +42,13 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/reset', resetRoutes);
 app.use('/api/payment-summary', paymentSummaryRoutes);
 
-// Serve static files from the dist folder
-app.use(express.static(path.join(__dirname, 'dist')));
+// Serve static files from the frontend's dist folder
+app.use(express.static(frontendDistPath));
 
-// Catch-all route to serve index.html for any unmatched routes
+// Catch-all route to serve index.html
 app.get('*', (req, res) => {
-  const indexPath = path.join(__dirname, 'dist', 'index.html');
+  const indexPath = path.join(frontendDistPath, 'index.html');
+  console.log('Looking for index at:', indexPath); // helpful for debugging
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
   } else {
