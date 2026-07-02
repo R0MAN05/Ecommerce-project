@@ -29,11 +29,11 @@
 .checkout-header .logo {
   height: 26px;
   margin-top: 0px;
+    font-size: 20px;
+  color: rgb(25, 135, 84);
+  font-weight: bold;
 }
 
-.checkout-header .mobile-logo {
-  display: none;
-}
 
 /* @media is used to create responsive design (making the
    website look good on any screen size). This @media
